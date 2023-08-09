@@ -1,424 +1,415 @@
-"ui";
+"uii"
 
-alert("最新版：v1.32");
-ui.layout(
-    <frame>
-        <vertical bg="#eef2fb">
-            <appbar>
-                <toolbar id="toolbar" bg="#FF1493" title="大麦助手 v1.32" />
-                <tabs id="tabs" bg="#FF69B4" />
-                {/* FFC0CB */}
-            </appbar>
-            <horizontal >
-                <Switch id="autoService" text="无障碍服务" checked="{{auto.service != null}}" textSize="15sp" />
-                <Switch margin="12 0" id="floatyService" text="悬浮窗权限" checked="{{(new android.provider.Settings).canDrawOverlays(context)}}" />
-            </horizontal>
-            <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
+threads.start(function () {
+    var window = floaty.window(
+        <frame gravity="center">
+            <button id="closeBtn" text="v1.30" w="40" h="40" bg="#00FA9A" />
+            {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
+        </frame>
+    );
 
-            <viewpager id="viewpager">
-                <ScrollView>
-                    <vertical>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <linear>
-                            <button id="loge" text="查看数据" /><EditText id="putdata" hint="点击查看保存的数据" />
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <linear>
-                            <button id="ms" text="检查延迟" /><EditText id="msout" hint="查看手机延迟" />
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <linear >
-                            <button text="解析脚本" id="download" />
-                            <text id="loadyes" text="已解析✅" />
-                            <text id="loadno" text="未解析❌" />
-                            <button text="刷" id="downloadf5" />
-                            <button text="卸" id="deletedown" />
-                            <button text="adb" id="adb" />
-                        </linear>
-                        <button id="START" text="开始" textSize="28sp" />
-                        <text textSize="16sp" textColor="black" text="  **检查脚本版本是否与软件版本一致，若不一致重新解析**" />
-                    </vertical>
-                </ScrollView>
-                <ScrollView>
-                    <vertical>
-                        <linear>
-                            <text textSize="22sp" textColor="black" text="输入日期:" /><input id="日期" hint="(周一 ~ 周日 ) " />
-                        </linear>
-                        <linear>
-                            <text textSize="22sp" textColor="black" text="输入票档:" /> <input id="票档" hint="580/780/1280" inputType="number" />
-                        </linear>
-                        <linear>
-                            <text textSize="22sp" textColor="black" text="输入观影人:" /><text textSize="22sp" textColor="black" text="提前前往大麦添加观影人" />
-                        </linear>
-                        <linear>
-                            <input id="观影人" hint="用 ,，.。空格 隔开" />
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <linear>
-                            <EditText id="output" hint="等待检查" /><button text="检查" id="check" /> <button id="release" text="清除" />
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <text textSize="16sp" textColor="black" text="本软件仅用于代替人工完成抢票，请勿用于非法用途！" />
-                        <text textSize="16sp" textColor="black" text="**启动脚本前请打开该应用无障碍**" />
-                        <linear>
-                            <button id="savedm" text="保存" />
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                    </vertical>
-                </ScrollView>
-                <ScrollView>
-                    <vertical>
-                        <text textSize="16sp" textColor="black" text="  **施工中…………**" />
-                        <linear>
-                            <text textSize="22sp" textColor="black" text="输入备选日期:" /><input id="回流日期" hint="用 ,，.。空格 隔开" />
-                        </linear>
-                        <linear>
-                            <text textSize="22sp" textColor="black" text="输入备选票档:" /> <input id="回流票档" hint="用 ,，.。空格 隔开" />//inputType="number"
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <linear>
-                            <EditText id="回流output" hint="等待检查" /><button text="检查" id="回流check" />
-                        </linear>
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <button id="回流savedm" text="回流保存" />
-                    </vertical>
-                </ScrollView>
-                {/* <ScrollView>//
-                <vertical padding="16">
-                    <frame height="200" gravity="center">
-                        <linear>
-                            <text textSize="22sp" textColor="black" text="账号文本: " /> <input id="账号文本" text="" hint="账号----密码" />
-                        </linear>
-                    </frame>
-                </vertical>
-            </ScrollView> */}
+    window.setPosition(device.width / 3 + 110 + 55, -100);
+    window.setSize(device.width * 1 / 2, 250);
+    window.setAdjustEnabled(false);
 
-            </viewpager>
-        </vertical>
-        {/* <fab id="add" w="auto" h="auto" src="@drawable/ic_vpn_key_black_48dp"
-            margin="16" layout_gravity="bottom|right" tint="#ffffff" /> */}
+    var statusText = window.status;
 
-    </frame>
-
-);
-// 设置滑动页面的标题
-ui.viewpager.setTitles(["首页", "抢", "回流"]);
-// 让滑动页面和标签栏联动
-ui.tabs.setupWithViewPager(ui.viewpager);
+    window.closeBtn.click(() => {//
+        toast(("运行中"))
+    });
+})
 
 
-ui.loadyes.setVisibility(android.view.View.INVISIBLE);
-ui.loadno.setVisibility(android.view.View.VISIBLE);
-
-
-var bbb;
-var ccc;
-ui.check.on("click", function () {
-    //app.startActivity("console");
-    var c = "日期：" + ui.日期.text(); var d = "票档：" + ui.票档.text();
-    var aaa = ui.观影人.text().split(/[,，.。：:\s]+/);
-    bbb = [];
-    for (var i = 0; i < aaa.length; i++) {
-        if (aaa[i] !== "") {
-            bbb.push(aaa[i]);
-        }
-    };
-    ccc = bbb.join(',');
-    var a = "观影人：" + bbb.length + "位"
-    var w = c + "\n" + d + "\n" + a;
-    log(w);
-    for (n = 0; n < bbb.length; n++) {
-        if (bbb[n] !== "") {
-            var b = (n + 1) + "号观影人" + ":" + bbb[n];
-            log(b);
-            var newS = w + "\n" + b;
-            w = newS;
-        };
-    }
-    try {
-        ui.output.setText(w);
-    } catch (error) {
-        log(error)
-    }
-});//删掉了
-
-var eee; var fff; var ggg; var iii;
-ui.回流check.on("click", function () {
-    //app.startActivity("console");
-    var ddd = ui.回流日期.text().split(/[,，.。：:\s]+/);
-    eee = [];
-    for (var i = 0; i < ddd.length; i++) {
-        if (ddd[i] !== "") {
-            eee.push(ddd[i]);
-        }
-    };
-    fff = eee.join(',');
-    var a = "备选场次：" + eee.length + "场"
-    var w = a;
-    log(w);
-    for (n = 0; n < eee.length; n++) {
-        if (eee[n] !== "") {
-            var b = (n + 1) + "场" + ":" + eee[n];
-            log(b);
-            var newS = w + "\n" + b;
-            w = newS;
-        };
-    };
-
-    var ggg = ui.回流票档.text().split(/[,，.。：:\s]+/);
-    hhh = [];
-    for (var i = 0; i < ggg.length; i++) {
-        if (ggg[i] !== "") {
-            hhh.push(ggg[i]);
-        }
-    };
-    iii = hhh.join(',');
-    var c = "备选票档：" + hhh.length + "档"
-    var v = c;
-    log(v);
-    for (n = 0; n < hhh.length; n++) {
-        if (eee[n] !== "") {
-            var d = (n + 1) + "档位" + ":" + hhh[n];
-            log(d);
-            var newSS = v + "\n" + d;
-            v = newSS;
-        };
-    }
-
-
-    try {
-        ui.回流output.setText(w + "\n" + v);
-    } catch (error) {
-        log(error)
-    }
-});//删掉了
-
-ui.release.on("click", function () {
-    ui.日期.setText("");
-    ui.票档.setText("");
-    ui.观影人.setText("");
-    ui.output.setText("");
-});
-
-
-////////////////////////////////////////////////////储存////////////////
 var 大麦 = storages.create("大麦");
-////////////////////////////////////////////////////储存////////////////
-ui.savedm.click(function () {
-    try {
-        大麦.put("日期", ui.日期.text());
-        大麦.put("票档", ui.票档.text());
-        大麦.put("观影人", ccc);
-        Initialize();
-        toastLog("抢票设置 保存成功！");
-    } catch (error) {
-        app.startActivity("console")
-        log(error);
-        log("保存不成功")
+var 场次 = 大麦.get("日期");
+var 票档 = 大麦.get("票档");
+var Name = 大麦.get("观影人");
+var A = 大麦.get("A");
+var B = 大麦.get("B");
+var C = 大麦.get("C");
+var D = 大麦.get("D");
+var E = 大麦.get("E");
+var F = 大麦.get("F");
+// var 场次 = "周日";   //
+// var 票档 = "1980";//ttext("内场1980元")
+// var Name = "冉彬力 李嘉宜 庄思悦";
+var Namee = Name.split(/[,，.。：:\s]+/);
+var Nameee = [];
+log(场次 + 票档 + Name + Namee)
+for (var i = 0; i < Namee.length; i++) {
+    if (Namee[i] !== "") {
+        Nameee.push(Namee[i]);
     }
-    // log(bbb)
-    // log(ccc)
-});
-
-ui.回流savedm.click(function () {
-    try {
-        大麦.put("回流日期", fff);
-        大麦.put("回流票档", iii);
-        Initialize();
-        toastLog("回流抢票设置 保存成功！");
-    } catch (error) {
-        app.startActivity("console")
-        log(error);
-        log("保存不成功")
-    }
-    // log(bbb)
-    // log(ccc)
-});
-
-/////////////////////////////读取/////////////////////
-// 读取脚本设置
-function Initialize() {
-    if (大麦.get("日期") != undefined) { ui.日期.setText(大麦.get("日期")) }
-    if (大麦.get("票档") != undefined) { ui.票档.setText(大麦.get("票档")) }
-    if (大麦.get("观影人") != undefined) { ui.观影人.setText(大麦.get("观影人")) }
-    if (大麦.get("回流日期") != undefined) { ui.回流日期.setText(大麦.get("回流日期")) }
-    if (大麦.get("回流票档") != undefined) { ui.回流票档.setText(大麦.get("回流票档")) }
 };
 
-
-ui.loge.on("click", function () {
-    var A = 大麦.get("A");
-    var B = 大麦.get("B");
-    var C = 大麦.get("C");
-    var D = 大麦.get("D");
-    var E = 大麦.get("E");
-    var F = 大麦.get("F");
-    var day = 大麦.get("日期");
-    var price = 大麦.get("票档");
-    var people = 大麦.get("观影人")
-    ui.putdata.setText("日期：" + day + "\n" + "票档：" + price + "\n" + "观影人：" + people + "\n" + "初始化数据：" + A + B + C + D + E + F);
-    log(day + "\n" + price + "\n" + people);
-    Initialize();
-});
-
-ui.ms.on("click", function () {
-    threads.start(function () {
-        var downloadProgress = 0; // 在循环之前定义下载进度变量
-        var downloadDialog;
-        var downloadDialog = dialogs.build({
-            title: "检测中...",
-            progress: {
-                max: 100,
-                showMinMax: true
-            },
-            autoDismiss: false
-        })
-            .show();
-
-        for (var n = 0; n < 100; n++) {
-            downloadProgress += 1;
-            ui.run(function () {
-                downloadDialog.setProgress(downloadProgress);
-            });
-            var b;
-            if (n == 0) {
-                b = 0;
+//////////////////////////////////////////////////////////////////////////////////
+var starting = -1;
+//var 立即购买 = text("立即购买").findOne();  
+for (gm = 1; gm > 0; gm++) {
+    log("识别次数：" + gm)
+    var 立即购买 = textMatches(/立即购买|立即预订|选座购买/).findOne(1);
+    var 努刷新 = textContains("努力刷新").findOne(1);
+    if (立即购买) {
+        log("立即购买！")
+        for (n = 1; n > 0; n++) {
+            //click(立即购买.bounds().centerX(), 立即购买.bounds().centerY())
+            click(A, B);                                               //立即购买的按钮位置
+            var cc = textContains("场次").findOne(1);
+            var 努力刷新 = textContains("努力刷新").findOne(1);
+            if (cc) {
+                log("正在选择场次和票档");
+                break;
+            } else if (努力刷新) {
+                log("又要刷新");
+                try {
+                    click(努力刷新.bounds().centerX(), 努力刷新.bounds().centerY());
+                    努力刷新.click();
+                } catch (error) {
+                }
+                continue;
+            };
+        };
+        break;
+    } else if (努刷新) {
+        log("太火爆了，努力刷新");
+        for (n = 1; n > 0; n++) {
+            try {
+                click(努刷新.bounds().centerX(), 努刷新.bounds().centerY())
+                努刷新.click();
+            } catch (error) {
             }
-            var currentTime = new Date().getTime();
-            var 测试 = textMatches(/这是测试|一个测试|这是一个/).findOne(1);
-            if (测试) {
-                log("测试都有？");
+            var 力刷新 = textContains("努力刷新").findOne(1);
+            if (!力刷新) {
+                log("刷完开抢！");
+                break;
+            };
+        };
+    }
+}
+
+抢啊啊啊();
+
+
+for (cf = 1; cf > 0; cf++) {
+    log("重复抢了：" + cf + "次")
+    抢啊啊啊();
+};
+
+////////////////////////////////////////////function（）/////////////////////////////////////////
+
+function 抢啊啊啊() {
+    if (starting !== 1 && starting !== 3) {
+        选场次票档和数量();
+        确定();
+    };
+
+    if (starting !== 66) {
+        选择观影人();
+        提交订单();
+    };
+
+    被盾了()
+};
+
+function 选场次票档和数量() {
+    var number = false;
+    starting = 100;
+    for (m = 1; m > 0; m++) {
+        var changci = textContains(场次).findOne(1);
+        if (changci) {
+            log(n + "正在选择场次");
+            changci.parent().click();
+            var pd = textContains("票档").findOne(1);
+            if (pd) {
                 break;
             }
-            var nowtime = new Date().getTime();
-            var a = nowtime - currentTime;
-            b = b + a;
-            if (downloadProgress >= 100) {
-                downloadDialog.dismiss();
+        };
+    };
+    for (m = 1; m > 0; m++) {
+        var piaodang = textContains(票档).findOne(1);
+        if (piaodang) {
+            log("正在选择票档");
+            piaodang.parent().click();
+            var sl = text("数量").findOne(1);
+            if (sl) {
+                number = true;
+                break;
+            };
+        };
+    };
+    if (number) {
+        var plus = id("cn.damai:id/img_jia");
+        var minus = id("cn.damai:id/img_jian");
+        for (m = 0; m > -1; m++) {
+            var num = id("cn.damai:id/tv_num").findOne();
+            var re = /\d+/g;  // 匹配一个或多个数字
+            var nownum = num.text().match(re)
+            log(nownum)
+            if (nownum < Nameee.length) {
+                plus.click();
+            } else if (nownum > Nameee.length) {
+                minus.click()
+            } else if (nownum == Nameee.length) {
+                log("数量对了")
+                break;
             }
-        }
-        var c;
-        var d = b / 100
-        if (d <= 30) {
-            c = "几乎无延迟"
-        } else if (30 < d && d < 50) {
-            c = "低延迟"
-        } else if (50 <= d && d < 65) {
-            c = "中延迟"
-        } else if (65 <= d && d < 80) {
-            c = "高延迟"
-        } else if (d >= 80) {
-            c = "延迟太高了"
-        }
-        log("当前平均延迟：" + d + "毫秒:" + c)
-        ui.run(function () {
-            ui.msout.setText("当前平均延迟：" + d + "毫秒:" + c);
-        });
-    })
+        };
+    };
+};
 
-});
-
-ui.START.on("click", function () {
-    engines.execScriptFile("xfc.js")
-});
-
-
-
-////////////////////////////////////////////////////////////////////////////ksjs
-var DMi = 0;
-var DM;
-var filePathDM = '/sdcard/DM.js';
-ui.download.on("click", function () {
-    toastLog("开始解析DM脚本");
-    //
-    function 解析DM() {
-        let url = [
-            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/XiaoMai/main/harven',
-        ];
-        for (var i = 0; i < 2; i++) {
-            try {
-                let res = http.get(url[i], {
-                    timeout: 10000 // 设置超时时间为10秒
-                });
-                console.log(res.statusCode);
-                if (res.statusCode == 200) {
-                    DM = res.body.string();
-                    if (DM.indexOf('"uii"') == 0) {
-                        DMi = 1;
-                        toastLog('大麦' + '解析成功✅');
-                        alert('大麦' + '解析成功✅')
-                        //log("开始加载KSJS");
-                        //engines.execScript("KSJS", KSJS);
-                        break;
+function 确定() {
+    starting = 100;
+    for (qd = 1; qd > 0; qd++) {
+        log("点击确定：" + qd);
+        var confirms = id("cn.damai:id/btn_buy").findOne(1) || text("确定").findOne(1);
+        if (confirms) {
+            for (cqd = 1; cqd > 0; cqd++) {
+                if (confirms.visibleToUser() == true) {
+                    log("正在点击确认按钮");
+                    try {
+                        //click(confirms.bounds().centerX(), confirms.bounds().centerY());
+                        click(C, D);
+                    } catch (error) {
+                        log("“确定”——在点了");// log(error)
                     };
                 } else {
-                    toastLog('大麦' + '解析链接失败❌');
-                    alert('大麦' + '解析链接失败❌')
+                    log("确认已经点了");
                 }
-            } catch (error) {
-                if (error instanceof java.net.SocketTimeoutException) {
-                    toastLog('大麦' + '解析超时❌');
-                    alert('大麦' + '解析超时❌')
-                    continue; // 继续下一次循环请求
-                } else {
-                    toastLog('大麦' + '解析失败❌' + error)//，错误：' + error);
-                    alert('大麦' + '解析失败❌')
+                var confirmorder = textMatches(/确认订单|系统繁忙|努力刷新/).findOne(1);
+                if (confirmorder) {
+                    log("确定了/繁忙了");
+                    break;
+                };
+            }
+            for (bzd = 1; bzd > 0; bzd++) {
+                log("努力刷新/提交订单界面：" + bzd)
+                //var toomany = textContains("人数太多").findOne(1);
+                var 努力刷新 = textContains("努力刷新").findOne(1);
+                var submit = textContains("确认订单").findOne(1);
+                var 人数过多 = textContains("人数过多").findOne(1);
+                var 稍后 = textContains("稍后").findOne(1);
+                var 被盾了 = idContains("nc_1").findOne(1);
+                var 操作频繁 = textContains("操作过于频繁").findOne(1);
+                if (submit) {
+                    log("进选人了");
+                    break;
+                } else if (努力刷新) {
+                    log("人太多啦，被盾了");
+                    for (sx = 1; sx > 0; sx++) {
+                        try {
+                            click(努力刷新.bounds().centerX(), 努力刷新.bounds().centerY());
+                            努力刷新.click();
+                        } catch (error) {
+                        }
+                        var submit = textContains("提交订单").findOne(1);
+                        if (submit) {
+                            log("刷出来了");
+                            break;
+                        } else {
+                            log("继续刷新" + sx)
+                            continue;
+                        };
+                    }
+                }
+                if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true) || (被盾了 && 被盾了.visibleToUser() == true) || (操作频繁 && 操作频繁.visibleToUser() == true)) {
+                    log("跳过选人被盾！");
+                    starting = 66;
+                    break;
+                }
+            }
+            break;
+        };
+    };
+}
+
+function 选择观影人() {
+    starting = 100;
+    for (n = 0; n < Nameee.length; n++) {
+        if (Nameee[n] !== "") {
+            var namee = text(Nameee[n]).findOne();
+            if (namee) {
+                log("正在选择" + (n + 1) + "号观影人" + ":" + Nameee[n]);
+                try {
+                    var nameeparent = namee.parent();
+                    if (nameeparent.child(nameeparent.children().length - 1).checked() == false) {
+                        nameeparent.click();
+                    };
+                } catch (error) {
+                    log("找不到checked框" + n);
+                    continue;
+                }
+            };
+        }
+    };
+}
+
+function 提交订单() {
+    starting = 100;
+    for (sub = 1; sub > 0; sub++) {
+        var submit = textContains("提交订单").findOne(1);
+        if (submit) {
+            for (miting = 1; miting > 0; miting++) {
+                log("正在提交订单" + miting);
+                try {
+                    //click(submit.bounds().centerX(), submit.bounds().centerY());
+                    click(E, F);
+                } catch (error) {
+                    log("正在提交——在点了")
+                }
+                var submit = textContains("提交订单").findOne(1);
+                if (!submit) {
+                    log("正在提交——点了");
+                    break;
                 };
             };
+            break;
+        };
+    };
+}
 
+function 被盾了() {
+    var ending = 0;
+    starting = 100;
+    for (rsgd = 0; rsgd > -1; rsgd++) {
+        log("被盾了吗？：" + rsgd)
+        var 人数过多 = textContains("人数过多").findOne(1);
+        var 稍后 = textContains("稍后").findOne(1);
+        var 被盾了 = idContains("nc_1").findOne(1);
+        var 操作频繁 = textContains("操作过于频繁").findOne(1);
+        var 没库存 = textContains("余票不足").findOne(1) || textContains("库存不足").findOne(1);
+        var 重复提交 = textContains("重复提交").findOne(1);
+        //出盾条件
+        var submit = textContains("确认订单").findOne(1);
+        var cc = textContains("场次").findOne(1);
+        if ((操作频繁 && 操作频繁.visibleToUser() == true) || (被盾了 && 被盾了.visibleToUser() == true)) {
+            log("被盾了");
+            function 滑块验证() {
+                for (n = 1; n > 0; n++) {
+                    log(n)
+                    var 滑块 = textContains("").findOne(1);
+                    var 滑动验证 = textContains("滑动验证").findOne(1);
+                    if (滑块) {
+                        log("有验证滑块！")
+                        var a = 滑块.bounds().centerX();
+                        var b = 滑块.bounds().centerY();
+                        log(a);
+                        log(b);
+                        swipe(a, b, 1400, b, 15);
+                        starting = 1;
+                        break;
+                    } else if (滑动验证 && !滑块) {
+                        continue;
+                        // log("找不到滑块");
+                        // back();
+                        // for (yj = 1; yj > 0; yj++) {
+                        //     log("yj" + yj)
+                        //     var 拥挤 = textContains("前方拥挤").findOne(1);
+                        //     var submit = textContains("提交订单").findOne(1);
+                        //     if (拥挤 && ) {
+                        //         log("前方拥挤");
+                        //         //starting = 2;
+                        //         click(拥挤.bounds().centerX(), 拥挤.bounds().centerY());
+                        //         //break;
+                        //     } else if (submit && !拥挤) {
+                        //         log("回到提交了");
+                        //         starting = 3;
+                        //         break;
+                        //     };
+                        // };
+                        // break;
+                    } else {
+                        break;
+                    };
+                    //break;
+                };
+            }
+            for (n = 1; n > 0; n++) {
+                滑块验证();
+                var 人数过多 = textContains("人数过多").findOne(1);
+                var 稍后 = textContains("稍后").findOne(1);
+                var 没库存 = textContains("余票不足").findOne(1) || textContains("库存不足").findOne(1);
+                var 重复提交 = textContains("重复提交").findOne(1);
+                var 努力刷新 = textContains("努力刷新").findOne(1);
+                var submit = textContains("确认订单").findOne(1);
+                if (人数过多 || 稍后 || 没库存 || 重复提交 || submit) {
+                    log("出滑块了！");
+                    ending = 1;
+                    break;
+                } else if (努力刷新) {
+                    log("又要刷新");
+                    try {
+                        click(努力刷新.bounds().centerX(), 努力刷新.bounds().centerY());
+                        努力刷新.click();
+                    } catch (error) {
+                    }
+                };
+            };
+        } else if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true)) {
+            log("人数过多");
+            var 我知道了 = textContains("我知道了").findOne(1);
+            if (我知道了 && 我知道了.visibleToUser() == true) {
+                log("我知道了");
+                for (nn = 1; nn > 0; nn++) {
+                    if (nn % 2 == 1) {
+                        try {
+                            click(我知道了.bounds().centerX(), 我知道了.bounds().centerY());
+                            我知道了.click();
+                        } catch (error) {
+                        }
+                    } else if (nn % 2 == 0) {
+                        click(E, F);
+                    }
+                    var cc = textContains("场次").findOne(1);
+                    var submit = textContains("提交订单").findOne(1);
+                    if (cc) {
+                        log("正在重新选择场次和票档");
+                        starting = 100;
+                        break;
+                    } else if (submit) {
+                        log("空点 - 提交订单");
+                        starting = 3;
+                        break;
+                    } else {
+                        continue;
+                    };
+                };
+                break;
+            } else {
+                continue;
+            };
+        } else if (没库存 || 重复提交) {
+            log("没库存了 || 重复提交")//
+            //back();
+            var 我知道了 = textContains("我知道了").findOne(1);
+            if (我知道了 && 我知道了.visibleToUser() == true) {
+                log("我知道了");
+                for (nn = 1; nn > 0; nn++) {
+                    try {
+                        click(我知道了.bounds().centerX(), 我知道了.bounds().centerY());
+                        我知道了.click();
+                    } catch (error) {
+                    }
+                    var cc = textContains("场次").findOne(1);
+                    var submit = textContains("提交订单").findOne(1);
+                    if (cc) {
+                        log("正在重新选择场次和票档");
+                        starting = 100;
+                        break;
+                    } else if (submit) {
+                        log("空点 - 提交订单");
+                        starting = 3;
+                        break;
+                    } else {
+                        continue;
+                    };
+                };
+            }
+        } else if (ending == 1 || submit || cc) {
+            log("出盾了")
+            log(ending == 1, submit, cc)
+            break;
         }
-
     };
+};
 
-    threads.start(function () { // 创建新的子线程
-        解析DM();
-    });
-    //
-    if (DMi == 1) {
-        toastLog("正在保存大麦");
-        if (files.exists(filePathDM)) {
-            files.remove(filePathDM);
-        };
-        files.write(filePathDM, DM);
-        toastLog("大麦 已保存");
-        ui.loadyes.setVisibility(android.view.View.VISIBLE);
-        ui.loadno.setVisibility(android.view.View.INVISIBLE);
-    };
-});
-
-
-ui.downloadf5.on("click", function () {
-    if (DMi == 1) {
-        if (files.exists(filePathDM)) {
-            files.remove(filePathDM);
-        };
-        files.write(filePathDM, DM);
-        toastLog("大麦 已保存");
-        ui.loadyes.setVisibility(android.view.View.VISIBLE);
-        ui.loadno.setVisibility(android.view.View.INVISIBLE);
-    } else if (DMi == 0) {
-        ui.loadyes.setVisibility(android.view.View.INVISIBLE);
-        ui.loadno.setVisibility(android.view.View.VISIBLE);
-    };
-});
-
-
-ui.deletedown.on("click", function () {
-    if (files.exists(filePathDM)) {
-        files.remove(filePathDM);
-    };
-    alert('大麦' + '已卸载')
-    DMi = 0;
-    ui.loadyes.setVisibility(android.view.View.INVISIBLE);
-    ui.loadno.setVisibility(android.view.View.VISIBLE);
-});
-
-ui.adb.on("click", function () {
-    app.startActivity("console")
-});
-/////////////////////////////////////////////////////////////////////////////ks
+////////////////////////////////////////////function（）/////////////////////////////////////////
