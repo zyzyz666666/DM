@@ -86,6 +86,7 @@ ui.layout(
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                         <button id="回流savedm" text="回流保存" />
+                        <button id="回流download" text="解析" />
                     </vertical>
                 </ScrollView>
                 {/* <ScrollView>//
@@ -147,6 +148,7 @@ ui.check.on("click", function () {
     }
 });//删掉了
 
+var eee; var fff; var ggg; var iii;
 ui.回流check.on("click", function () {
     //app.startActivity("console");
     var ddd = ui.回流日期.text().split(/[,，.。：:\s]+/);
@@ -224,7 +226,20 @@ ui.savedm.click(function () {
     // log(ccc)
 });
 
-
+ui.回流savedm.click(function () {
+    try {
+        大麦.put("回流日期", fff);
+        大麦.put("回流票档", iii);
+        Initialize();
+        toastLog("回流抢票设置 保存成功！");
+    } catch (error) {
+        app.startActivity("console")
+        log(error);
+        log("保存不成功")
+    }
+    // log(bbb)
+    // log(ccc)
+});
 
 /////////////////////////////读取/////////////////////
 // 读取脚本设置
@@ -232,6 +247,8 @@ function Initialize() {
     if (大麦.get("日期") != undefined) { ui.日期.setText(大麦.get("日期")) }
     if (大麦.get("票档") != undefined) { ui.票档.setText(大麦.get("票档")) }
     if (大麦.get("观影人") != undefined) { ui.观影人.setText(大麦.get("观影人")) }
+    if (大麦.get("回流日期") != undefined) { ui.回流日期.setText(大麦.get("回流日期")) }
+    if (大麦.get("回流票档") != undefined) { ui.回流票档.setText(大麦.get("回流票档")) }
 };
 
 
@@ -313,7 +330,7 @@ ui.START.on("click", function () {
 
 
 
-////////////////////////////////////////////////////////////////////////////ksjs
+////////////////////////////////////////////////////////////////////////////DM
 var DMi = 0;
 var DM;
 var filePathDM = '/sdcard/DM.js';
@@ -322,7 +339,7 @@ ui.download.on("click", function () {
     //
     function 解析DM() {
         let url = [
-            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/XiaoMai/main/harven',
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/DM/main/harven',
         ];
         for (var i = 0; i < 2; i++) {
             try {
@@ -406,3 +423,64 @@ ui.adb.on("click", function () {
     app.startActivity("console")
 });
 /////////////////////////////////////////////////////////////////////////////ks
+////////////////////////////////////////////////////////////////////////////HL
+var HLi = 0;
+var HL;
+var filePathHL = '/sdcard/HL.js';
+ui.回流download.on("click", function () {
+    toastLog("开始解析HL脚本");
+    //
+    function 解析HL() {
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/DM/main/回流',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let res = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                console.log(res.statusCode);
+                if (res.statusCode == 200) {
+                    HL = res.body.string();
+                    if (HL.indexOf('"uii"') == 0) {
+                        HLi = 1;
+                        toastLog('大麦' + '解析成功✅');
+                        alert('大麦' + '解析成功✅')
+                        //log("开始加载KSJS");
+                        //engines.execScript("KSJS", KSJS);
+                        break;
+                    };
+                } else {
+                    toastLog('大麦' + '解析链接失败❌');
+                    alert('大麦' + '解析链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('大麦' + '解析超时❌');
+                    alert('大麦' + '解析超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('大麦' + '解析失败❌' + error)//，错误：' + error);
+                    alert('大麦' + '解析失败❌')
+                };
+            };
+
+        }
+
+    };
+
+    threads.start(function () { // 创建新的子线程
+        解析HL();
+    });
+    //
+    if (HLi == 1) {
+        toastLog("正在保存大麦");
+        if (files.exists(filePathHL)) {
+            files.remove(filePathHL);
+        };
+        files.write(filePathHL, HL);
+        toastLog("大麦 已保存");
+        ui.loadyes.setVisibility(android.view.View.VISIBLE);
+        ui.loadno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
