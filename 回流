@@ -3,7 +3,7 @@
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="回流v1" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="回2" w="40" h="40" bg="#00FA9A" />
             {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
         </frame>
     );
@@ -280,8 +280,10 @@ function 被盾了() {
 var 大麦 = storages.create("大麦");
 var 场次 = 大麦.get("日期");
 var 票档 = 大麦.get("票档");
- var 回流场次 = 大麦.get("回流日期");
- var 回流票档 = 大麦.get("回流票档");
+// var 回流场次 = 大麦.get("回流日期");
+// var 回流票档 = 大麦.get("回流票档");
+var 回流场次 = "周日,周六"
+var 回流票档 = "480,780,680,880"
 var Name = 大麦.get("观影人");
 var A = 大麦.get("A");
 var B = 大麦.get("B");
@@ -490,6 +492,9 @@ function 回流票() {
         if (hlp == 1) {
             break;
         }
+    }
+    if (n == pdnum + 1 && hlp == 0) {
+        回流票();
     }
 }
 
