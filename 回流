@@ -280,10 +280,8 @@ function 被盾了() {
 var 大麦 = storages.create("大麦");
 var 场次 = 大麦.get("日期");
 var 票档 = 大麦.get("票档");
-// var 回流场次 = 大麦.get("回流日期");
-// var 回流票档 = 大麦.get("回流票档");
-var 回流场次 = "周日,周六"
-var 回流票档 = "480,780,680,880"
+ var 回流场次 = 大麦.get("回流日期");
+ var 回流票档 = 大麦.get("回流票档");
 var Name = 大麦.get("观影人");
 var A = 大麦.get("A");
 var B = 大麦.get("B");
