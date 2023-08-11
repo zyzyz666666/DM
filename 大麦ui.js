@@ -87,6 +87,7 @@ ui.layout(
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                         <button id="回流savedm" text="回流保存" />
                         <button id="回流download" text="解析" />
+                        <button id='hlloadf5' text="保存" />
                     </vertical>
                 </ScrollView>
                 {/* <ScrollView>//
@@ -474,7 +475,19 @@ ui.回流download.on("click", function () {
     });
     //
     if (HLi == 1) {
-        toastLog("正在保存大麦");
+        toastLog("正在保存 回流");
+        if (files.exists(filePathHL)) {
+            files.remove(filePathHL);
+        };
+        files.write(filePathHL, HL);
+        toastLog("回流 已保存");
+        ui.loadyes.setVisibility(android.view.View.VISIBLE);
+        ui.loadno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+
+ui.hlloadf5.on("click", function () {
+    if (HLi == 1) {
         if (files.exists(filePathHL)) {
             files.remove(filePathHL);
         };
@@ -482,5 +495,8 @@ ui.回流download.on("click", function () {
         toastLog("大麦 已保存");
         ui.loadyes.setVisibility(android.view.View.VISIBLE);
         ui.loadno.setVisibility(android.view.View.INVISIBLE);
+    } else if (HLi == 0) {
+        ui.loadyes.setVisibility(android.view.View.INVISIBLE);
+        ui.loadno.setVisibility(android.view.View.VISIBLE);
     };
 });
