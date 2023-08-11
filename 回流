@@ -372,6 +372,7 @@ function 轮流点() {
     var f122 = false;
     for (m = 1; m > 0; m++) {
         var firstControl = id("cn.damai:id/tv_perform_tip").findOne(1);
+        var 被盾了 = idContains("nc_1").findOne(1);
         if (firstControl) {
             try {
                 var firstParent = firstControl.parent();
@@ -412,6 +413,8 @@ function 轮流点() {
                 log("要的回流票")
                 break;
             }
+        } else if (被盾了) {
+            被盾了();
         }
     }
 }
@@ -422,6 +425,7 @@ function 回流票() {
     var c;
     for (m = 1; m > 0; m++) {
         var pd = text("票档").findOne(1) || id("cn.damai:id/tv_price_name").findOne(1);
+        var 被盾了 = idContains("nc_1").findOne(1);
         if (pd) {
             var tips = id("cn.damai:id/tv_register_tip").findOne(10);
             var 优惠tip = id("cn.damai:id/tv_bottom_discount_tip").findOne(10);
@@ -446,6 +450,8 @@ function 回流票() {
             } catch (error) {
                 continue;
             }
+        } else if (被盾了) {
+            被盾了();
         }
     };
     for (n = 1; n < pdnum + 1; n++) {
@@ -480,13 +486,15 @@ function 回流票() {
                     }
                 }
             } else {
-                log(pdd.child(0).text())
-                for (w = 0; w < 票档arr.length; w++) {
-                    if (pdd.child(0).text().includes(票档arr[w])) { //要用正则 
-                        hlp = 1;
-                        log("去抢回流票");
-                        v = w;
-                        break;
+                if (pdd.child(0) !== null) {
+                    log(pdd.child(0).text())
+                    for (w = 0; w < 票档arr.length; w++) {
+                        if (pdd.child(0).text().includes(票档arr[w])) { //要用正则 
+                            hlp = 1;
+                            log("去抢回流票");
+                            v = w;
+                            break;
+                        }
                     }
                 }
             }
