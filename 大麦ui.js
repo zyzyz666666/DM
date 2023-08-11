@@ -1,11 +1,11 @@
 "ui";
 
-alert("最新版：v1.3");
+alert("最新版：v1.32");
 ui.layout(
     <frame>
         <vertical bg="#eef2fb">
             <appbar>
-                <toolbar id="toolbar" bg="#FF1493" title="大麦助手 v1.3" />
+                <toolbar id="toolbar" bg="#FF1493" title="大麦助手 v1.32" />
                 <tabs id="tabs" bg="#FF69B4" />
                 {/* FFC0CB */}
             </appbar>
