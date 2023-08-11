@@ -355,8 +355,8 @@ function 回抢啊啊啊() {
 };
 
 if (count == 1) {
-    log("出去点");
     back();
+    log("出去点");
     出去点();
 } else if (count > 1) {
     log("轮流点")
@@ -496,12 +496,57 @@ function 回流票() {
         }
     }
     if (n == pdnum + 1 && hlp == 0) {
-        回流票();
+        if (count == 1) {
+            back();
+            出去点();
+        } else if (count > 1) {
+            回流票();
+        }
+
     }
 }
 
 function 出去点() {
-
+    for (m = 1; m > 0; m++) {
+        var 立即购买 = textMatches(/立即购买|立即预订|选座购买|缺货登记/).findOne(1);
+        var 努刷新 = textContains("努力刷新").findOne(1);
+        if (立即购买) {
+            log("立即购买！")
+            for (n = 1; n > 0; n++) {
+                click(A, B);                                               //立即购买的按钮位置
+                var cc = textContains("场次").findOne(1);
+                var 努力刷新 = textContains("努力刷新").findOne(1);
+                if (cc) {
+                    log("正在选择场次和票档");
+                    break;
+                } else if (努力刷新) {
+                    log("又要刷新");
+                    try {
+                        click(努力刷新.bounds().centerX(), 努力刷新.bounds().centerY());
+                        努力刷新.click();
+                    } catch (error) {
+                    }
+                    continue;
+                };
+            };
+            break;
+        } else if (努刷新) {
+            log("太火爆了，努力刷新");
+            for (n = 1; n > 0; n++) {
+                try {
+                    click(努刷新.bounds().centerX(), 努刷新.bounds().centerY())
+                    努刷新.click();
+                } catch (error) {
+                }
+                var 力刷新 = textContains("努力刷新").findOne(1);
+                if (!力刷新) {
+                    log("刷完开抢！");
+                    break;
+                };
+            };
+        }
+    }
+    回流票()
 }
 
 
@@ -526,4 +571,3 @@ function 流程() {
         }
     }
 }
-流程() 
