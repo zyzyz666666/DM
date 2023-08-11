@@ -143,4 +143,440 @@ function 被盾了() {
         var 被盾了 = idContains("nc_1").findOne(1);
         var 操作频繁 = textContains("操作过于频繁").findOne(1);
         var 没库存 = textContains("余票不足").findOne(1) || textContains("库存不足").findOne(1);
-        var 重复提交 = textContai
+        var 重复提交 = textContains("重复提交").findOne(1);
+        var 拥挤 = textContains("前方拥挤").findOne(1);
+        //出盾条件
+        var submit = textContains("确认订单").findOne(1);
+        var cc = textContains("场次").findOne(1);
+        if ((操作频繁 && 操作频繁.visibleToUser() == true) || (被盾了 && 被盾了.visibleToUser() == true)) {
+            log("被盾了");
+            function 滑块验证() {
+                for (n = 1; n > 0; n++) {
+                    log(n)
+                    var 滑块 = textContains("").findOne(1);
+                    var 滑动验证 = textContains("滑动验证").findOne(1);
+                    if (滑块) {
+                        log("有验证滑块！")
+                        var a = 滑块.bounds().centerX();
+                        var b = 滑块.bounds().centerY();
+                        log(a);
+                        log(b);
+                        swipe(a, b, 1400, b, 15);
+                        starting = 1;
+                        break;
+                    } else if (滑动验证 && !滑块) {
+                        continue;
+                        // log("找不到滑块");
+                        // back();
+                        // for (yj = 1; yj > 0; yj++) {
+                        //     log("yj" + yj)
+                        //     var 拥挤 = textContains("前方拥挤").findOne(1);
+                        //     var submit = textContains("提交订单").findOne(1);
+                        //     if (拥挤 && ) {
+                        //         log("前方拥挤");
+                        //         //starting = 2;
+                        //         click(拥挤.bounds().centerX(), 拥挤.bounds().centerY());
+                        //         //break;
+                        //     } else if (submit && !拥挤) {
+                        //         log("回到提交了");
+                        //         starting = 3;
+                        //         break;
+                        //     };
+                        // };
+                        // break;
+                    } else {
+                        break;
+                    };
+                    //break;
+                };
+            }
+            for (n = 1; n > 0; n++) {
+                滑块验证();
+                var 人数过多 = textContains("人数过多").findOne(1);
+                var 稍后 = textContains("稍后").findOne(1);
+                var 没库存 = textContains("余票不足").findOne(1) || textContains("库存不足").findOne(1);
+                var 重复提交 = textContains("重复提交").findOne(1);
+                var 努力刷新 = textContains("努力刷新").findOne(1);
+                var submit = textContains("确认订单").findOne(1);
+                if (人数过多 || 稍后 || 没库存 || 重复提交 || submit) {
+                    log("出滑块了！");
+                    ending = 1;
+                    break;
+                } else if (努力刷新) {
+                    log("又要刷新");
+                    try {
+                        click(努力刷新.bounds().centerX(), 努力刷新.bounds().centerY());
+                        努力刷新.click();
+                    } catch (error) {
+                    }
+                };
+            };
+        } else if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true) || (拥挤 && 拥挤.visibleToUser() == true)) {
+            log("人数过多");
+            var 我知道了 = textContains("我知道了").findOne(1);
+            if (我知道了 && 我知道了.visibleToUser() == true) {
+                log("我知道了");
+                for (nn = 1; nn > 0; nn++) {
+                    if (nn % 2 == 1) {
+                        try {
+                            click(我知道了.bounds().centerX(), 我知道了.bounds().centerY());
+                            我知道了.click();
+                        } catch (error) {
+                        }
+                    } else if (nn % 2 == 0) {
+                        click(E, F);
+                    }
+                    var cc = textContains("场次").findOne(1);
+                    var submit = textContains("提交订单").findOne(1);
+                    if (cc) {
+                        log("正在重新选择场次和票档");
+                        starting = 100;
+                        break;
+                    } else if (submit) {
+                        log("空点 - 提交订单");
+                        starting = 3;
+                        break;
+                    } else {
+                        continue;
+                    };
+                };
+                break;
+            } else {
+                continue;
+            };
+        } else if (没库存 || 重复提交) {
+            log("没库存了 || 重复提交")//
+            //back();
+            var 我知道了 = textContains("我知道了").findOne(1);
+            if (我知道了 && 我知道了.visibleToUser() == true) {
+                log("我知道了");
+                for (nn = 1; nn > 0; nn++) {
+                    try {
+                        click(我知道了.bounds().centerX(), 我知道了.bounds().centerY());
+                        我知道了.click();
+                    } catch (error) {
+                    }
+                    var cc = textContains("场次").findOne(1);
+                    var submit = textContains("提交订单").findOne(1);
+                    if (cc) {
+                        log("正在重新选择场次和票档");
+                        starting = 100;
+                        break;
+                    } else if (submit) {
+                        log("空点 - 提交订单");
+                        starting = 3;
+                        break;
+                    } else {
+                        continue;
+                    };
+                };
+            }
+        } else if (ending == 1 || submit || cc) {
+            log("出盾了")
+            log(ending == 1, submit, cc)
+            break;
+        }
+    };
+};
+var 大麦 = storages.create("大麦");
+var 场次 = 大麦.get("日期");
+var 票档 = 大麦.get("票档");
+var 回流场次 = 大麦.get("回流日期");
+var 回流票档 = 大麦.get("回流票档");
+var Name = 大麦.get("观影人");
+var A = 大麦.get("A");
+var B = 大麦.get("B");
+var C = 大麦.get("C");
+var D = 大麦.get("D");
+var E = 大麦.get("E");
+var F = 大麦.get("F");
+var starting = -1;
+// var 场次 = "周日";   //
+// var 票档 = "1980";//ttext("内场1980元")
+// var Name = "冉彬力 李嘉宜 庄思悦";
+var Namee = Name.split(/[,，.。：:\s]+/);
+var Nameee = [];
+log(场次 + 票档 + Name + Namee)
+for (var i = 0; i < Namee.length; i++) {
+    if (Namee[i] !== "") {
+        Nameee.push(Namee[i]);
+    }
+};
+var 场次arr = 回流场次.split(/[,，.。：:\s]+/);
+var 票档arr = 回流票档.split(/[,，.。：:\s]+/);
+log(场次arr);
+log(票档arr)
+//确定一个两个
+var count
+for (m = 1; m > 0; m++) {
+    var firstControl = id("cn.damai:id/tv_perform_tip").findOne(1);
+    var secondControl = id("cn.damai:id/tv_price_name").findOne(1);
+
+    if (firstControl && secondControl) {
+        var firstParent = firstControl.parent();
+        var secondParent = secondControl.parent();
+
+        if (firstParent && secondParent && firstParent.equals(secondParent)) {
+            var firstIndex = firstControl.indexInParent();
+            var secondIndex = secondControl.indexInParent();
+
+            //log("第一个控件在父控件中的索引位置：" + firstIndex);
+            //log("第二个控件在父控件中的索引位置：" + secondIndex);
+
+            count = Math.abs(firstIndex - secondIndex) - 1;
+            log("场次数量为：" + count);
+            break;
+        } else {
+            log("两个控件不在同一个父控件中");
+        };
+    } else if (firstControl && !secondControl) {
+        var firstParent = firstControl.parent();
+        var firstIndex = firstControl.indexInParent();
+        var totalIndex = firstParent.children().length - 1;
+        count = totalIndex - firstIndex;
+        log(count);
+        break;
+    } else {
+        log("未找到指定的控件");
+    }
+}
+function 回抢啊啊啊() {
+    if (starting !== 1 && starting !== 3) {
+        回流票();
+        流程();
+        确定();
+    };
+
+    if (starting !== 66) {
+        选择观影人();
+        提交订单();
+    };
+
+    被盾了()
+};
+
+if (count == 1) {
+    back();
+    log("出去点");
+    出去点();
+} else if (count > 1) {
+    log("轮流点")
+    轮流点();
+}
+for (n = 1; n > 0; n++) {
+    回抢啊啊啊()
+}
+
+
+
+function 轮流点() {
+    var f122 = false;
+    for (m = 1; m > 0; m++) {
+        var firstControl = id("cn.damai:id/tv_perform_tip").findOne(1);
+        var 被盾了 = idContains("nc_1").findOne(1);
+        if (firstControl) {
+            try {
+                var firstParent = firstControl.parent();
+                var firstIndex = firstControl.indexInParent();
+            } catch (error) {
+                continue;
+            }
+            for (n = 0; n < count; n++) {
+                try {
+                    log("正在点击第" + (n + 1) + "个场次")
+                    var aab = firstParent.child(firstIndex + n + 1);
+                    aab.click();
+                    var f1 = aab.children().length;
+                    try {
+                        var f22 = aab.child(1);
+                    } catch (error) {
+                    }
+                    if ((f1 === 1 && aab.child(0).text() !== "无票") || !f22.text().includes("无票")) {   //aab.child(0).text() !== "无票"?
+                        for (w = 0; w < 场次arr.length; w++) {
+                            if (aab.child(0).text().includes(场次arr[w])) { //要用正则 
+                                f122 = true;
+                                log(aab.child(0).text() + ":有票");
+                                break;
+                            }
+                        }
+                    }
+                    //sleep(10)
+                } catch (error) {
+                    log("点击失败:" + (n + 1))
+                    continue;
+                }
+                if (f122) {
+                    log("要的回流票")
+                    break;
+                }
+            }
+            if (f122) {
+                log("要的回流票")
+                break;
+            }
+        } else if (被盾了) {
+            被盾了();
+        }
+    }
+}
+
+var v;
+function 回流票() {
+    var pdnum;
+    var c;
+    for (m = 1; m > 0; m++) {
+        var pd = text("票档").findOne(1) || id("cn.damai:id/tv_price_name").findOne(1);
+        var 被盾了 = idContains("nc_1").findOne(1);
+        if (pd) {
+            var tips = id("cn.damai:id/tv_register_tip").findOne(10);
+            var 优惠tip = id("cn.damai:id/tv_bottom_discount_tip").findOne(10);
+            try {
+                var pdParent = pd.parent();
+                var pdIndex = pd.indexInParent();
+                var underpdIndex = pdParent.children().length - 1;
+                if (tips) {
+                    var tipsIndex = tips.indexInParent();
+                    pdnum = (tipsIndex - 1) - pdIndex - 1;
+                    c = 0;
+                } else if (优惠tip) {
+                    var 优惠tipIndex = tips.indexInParent();
+                    pdnum = (优惠tipIndex) - (pdIndex + 1) - 1;
+                    c = 1;
+                } else {
+                    pdnum = underpdIndex - pdIndex;
+                    c = 0;
+                }
+                log("票档数：" + pdnum);
+                break;
+            } catch (error) {
+                continue;
+            }
+        } else if (被盾了) {
+            被盾了();
+        }
+    };
+    for (n = 1; n < pdnum + 1; n++) {
+        var hlp = 0;
+        try {
+            var pdd = pd.parent().child(pd.indexInParent() + n + c)
+        } catch (error) {
+            log("找不到档位")
+        }
+        try {
+            var pdd2 = pdd.child(1);
+        } catch (error) {
+            log("是有票")
+        }
+        if (pdd) {
+            if (pdd2) {
+                if (pdd.children().length !== 1 && (pdd2.text().includes("无票") || pdd2.text().includes("缺货"))) {
+                    if (pdd.child(0) !== null) {
+                        log(pdd.child(0).text() + "无票")
+                    }
+                } else {
+                    if (pdd.child(0) !== null) {
+                        log(pdd.child(0).text())
+                        for (w = 0; w < 票档arr.length; w++) {
+                            if (pdd.child(0).text().includes(票档arr[w])) { //要用正则 
+                                hlp = 1;
+                                log("去抢回流票");
+                                v = w;
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (pdd.child(0) !== null) {
+                    log(pdd.child(0).text())
+                    for (w = 0; w < 票档arr.length; w++) {
+                        if (pdd.child(0).text().includes(票档arr[w])) { //要用正则 
+                            hlp = 1;
+                            log("去抢回流票");
+                            v = w;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (hlp == 1) {
+            break;
+        }
+    }
+    if (n == pdnum + 1 && hlp == 0) {
+        if (count == 1) {
+            back();
+            出去点();
+        } else if (count > 1) {
+            回流票();
+        }
+
+    }
+}
+
+function 出去点() {
+    for (m = 1; m > 0; m++) {
+        var 立即购买 = textMatches(/立即购买|立即预订|选座购买|缺货登记/).findOne(1);
+        var 努刷新 = textContains("努力刷新").findOne(1);
+        if (立即购买) {
+            log("立即购买！")
+            for (n = 1; n > 0; n++) {
+                click(A, B);                                               //立即购买的按钮位置
+                var cc = textContains("场次").findOne(1);
+                var 努力刷新 = textContains("努力刷新").findOne(1);
+                if (cc) {
+                    log("正在选择场次和票档");
+                    break;
+                } else if (努力刷新) {
+                    log("又要刷新");
+                    try {
+                        click(努力刷新.bounds().centerX(), 努力刷新.bounds().centerY());
+                        努力刷新.click();
+                    } catch (error) {
+                    }
+                    continue;
+                };
+            };
+            break;
+        } else if (努刷新) {
+            log("太火爆了，努力刷新");
+            for (n = 1; n > 0; n++) {
+                try {
+                    click(努刷新.bounds().centerX(), 努刷新.bounds().centerY())
+                    努刷新.click();
+                } catch (error) {
+                }
+                var 力刷新 = textContains("努力刷新").findOne(1);
+                if (!力刷新) {
+                    log("刷完开抢！");
+                    break;
+                };
+            };
+        }
+    }
+    回流票()
+}
+
+
+function 流程() {
+    log(v)
+    log(票档arr[v])
+    if (票档arr[v] !== undefined && 票档arr[v] !== "") {
+        for (n = 1; n > 0; n++) {
+            var 回流选票 = textContains(票档arr[v]).findOne(1);
+            if (回流选票) {
+                log(回流选票)
+                点击(回流选票);
+                for (m = 1; m > 0; m++) {
+                    var confirms = id("cn.damai:id/btn_buy").findOne(1) || text("确定").findOne(1);
+                    if (confirms) {
+                        log('正常流程');
+                        break;
+                    };
+                };
+                break;
+            }
+        }
+    }
+}
