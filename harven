@@ -3,7 +3,7 @@
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="v1.30" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="v1.32" w="40" h="40" bg="#00FA9A" />
             {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
         </frame>
     );
@@ -271,7 +271,7 @@ function 被盾了() {
     var ending = 0;
     starting = 100;
     for (rsgd = 0; rsgd > -1; rsgd++) {
-        log("被盾了吗？：" + rsgd)
+        ////////////////////////////
         var 人数过多 = textContains("人数过多").findOne(1);
         var 稍后 = textContains("稍后").findOne(1);
         var 被盾了 = idContains("nc_1").findOne(1);
