@@ -3,7 +3,7 @@
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="m回流" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="回流v1" w="40" h="40" bg="#00FA9A" />
             {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
         </frame>
     );
@@ -144,6 +144,7 @@ function 被盾了() {
         var 操作频繁 = textContains("操作过于频繁").findOne(1);
         var 没库存 = textContains("余票不足").findOne(1) || textContains("库存不足").findOne(1);
         var 重复提交 = textContains("重复提交").findOne(1);
+        var 拥挤 = textContains("前方拥挤").findOne(1);
         //出盾条件
         var submit = textContains("确认订单").findOne(1);
         var cc = textContains("场次").findOne(1);
@@ -210,7 +211,7 @@ function 被盾了() {
                     }
                 };
             };
-        } else if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true)) {
+        } else if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true) || (拥挤 && 拥挤.visibleToUser() == true)) {
             log("人数过多");
             var 我知道了 = textContains("我知道了").findOne(1);
             if (我知道了 && 我知道了.visibleToUser() == true) {
