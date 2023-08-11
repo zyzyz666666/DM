@@ -3,7 +3,7 @@
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="回流v1" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="m回流" w="40" h="40" bg="#00FA9A" />
             {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
         </frame>
     );
