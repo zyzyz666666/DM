@@ -3,7 +3,7 @@
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="回2" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="回流v1" w="40" h="40" bg="#00FA9A" />
             {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
         </frame>
     );
@@ -280,10 +280,8 @@ function 被盾了() {
 var 大麦 = storages.create("大麦");
 var 场次 = 大麦.get("日期");
 var 票档 = 大麦.get("票档");
-// var 回流场次 = 大麦.get("回流日期");
-// var 回流票档 = 大麦.get("回流票档");
-var 回流场次 = "周日,周六"
-var 回流票档 = "480,780,680,880"
+var 回流场次 = 大麦.get("回流日期");
+var 回流票档 = 大麦.get("回流票档");
 var Name = 大麦.get("观影人");
 var A = 大麦.get("A");
 var B = 大麦.get("B");
@@ -465,15 +463,19 @@ function 回流票() {
         if (pdd) {
             if (pdd2) {
                 if (pdd.children().length !== 1 && (pdd2.text().includes("无票") || pdd2.text().includes("缺货"))) {
-                    log(pdd.child(0).text() + "无票")
+                    if (pdd.child(0) !== null) {
+                        log(pdd.child(0).text() + "无票")
+                    }
                 } else {
-                    log(pdd.child(0).text())
-                    for (w = 0; w < 票档arr.length; w++) {
-                        if (pdd.child(0).text().includes(票档arr[w])) { //要用正则 
-                            hlp = 1;
-                            log("去抢回流票");
-                            v = w;
-                            break;
+                    if (pdd.child(0) !== null) {
+                        log(pdd.child(0).text())
+                        for (w = 0; w < 票档arr.length; w++) {
+                            if (pdd.child(0).text().includes(票档arr[w])) { //要用正则 
+                                hlp = 1;
+                                log("去抢回流票");
+                                v = w;
+                                break;
+                            }
                         }
                     }
                 }
