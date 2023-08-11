@@ -5,7 +5,7 @@ ui.layout(
     <frame>
         <vertical bg="#eef2fb">
             <appbar>
-                <toolbar id="toolbar" bg="#FF1493" title="大麦助手 v1.35" />
+                <toolbar id="toolbar" bg="#FF1493" title="大麦助手 v1.35 + v2" />
                 <tabs id="tabs" bg="#FF69B4" />
                 {/* FFC0CB */}
             </appbar>
