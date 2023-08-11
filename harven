@@ -271,13 +271,14 @@ function 被盾了() {
     var ending = 0;
     starting = 100;
     for (rsgd = 0; rsgd > -1; rsgd++) {
-        ////////////////////////////
+        log("被盾了吗？：" + rsgd)
         var 人数过多 = textContains("人数过多").findOne(1);
         var 稍后 = textContains("稍后").findOne(1);
         var 被盾了 = idContains("nc_1").findOne(1);
         var 操作频繁 = textContains("操作过于频繁").findOne(1);
         var 没库存 = textContains("余票不足").findOne(1) || textContains("库存不足").findOne(1);
         var 重复提交 = textContains("重复提交").findOne(1);
+        var 拥挤 = textContains("前方拥挤").findOne(1);
         //出盾条件
         var submit = textContains("确认订单").findOne(1);
         var cc = textContains("场次").findOne(1);
@@ -344,7 +345,7 @@ function 被盾了() {
                     }
                 };
             };
-        } else if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true)) {
+        } else if ((人数过多 && 人数过多.visibleToUser() == true) || (稍后 && 稍后.visibleToUser() == true) || (拥挤 && 拥挤.visibleToUser() == true)) {
             log("人数过多");
             var 我知道了 = textContains("我知道了").findOne(1);
             if (我知道了 && 我知道了.visibleToUser() == true) {
