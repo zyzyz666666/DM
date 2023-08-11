@@ -3,7 +3,7 @@
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="回流v1" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="回流v2" w="40" h="40" bg="#00FA9A" />
             {/* <text id="status" text="运行中，请手动打开大麦APP" textSize="22sp" textColor="#ffffff" />// */}
         </frame>
     );
@@ -133,7 +133,7 @@ function 提交订单() {
     };
 }
 
-function 被盾了() {
+function 被盾() {
     var ending = 0;
     starting = 100;
     for (rsgd = 0; rsgd > -1; rsgd++) {
@@ -352,7 +352,7 @@ function 回抢啊啊啊() {
         提交订单();
     };
 
-    被盾了()
+    被盾()
 };
 
 if (count == 1) {
@@ -415,7 +415,7 @@ function 轮流点() {
                 break;
             }
         } else if (被盾了) {
-            被盾了();
+            被盾();
         }
     }
 }
@@ -452,7 +452,7 @@ function 回流票() {
                 continue;
             }
         } else if (被盾了) {
-            被盾了();
+            被盾();
         }
     };
     for (n = 1; n < pdnum + 1; n++) {
