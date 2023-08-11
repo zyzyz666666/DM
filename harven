@@ -108,7 +108,7 @@ function 抢啊啊啊() {
         提交订单();
     };
 
-    被盾了()
+    被盾()
 };
 
 function 选场次票档和数量() {
@@ -267,7 +267,7 @@ function 提交订单() {
     };
 }
 
-function 被盾了() {
+function 被盾() {
     var ending = 0;
     starting = 100;
     for (rsgd = 0; rsgd > -1; rsgd++) {
