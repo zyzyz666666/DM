@@ -7,14 +7,18 @@ for (n = 0; n > -1; n++) {
             files.remove(filePathDM);
         } else {
             log("1x");
+            break;
         }
 
         if (files.exists(filePathHL)) {
             files.remove(filePathHL);
         } else {
             log("2x")
+            break
         };
     } catch (error) {
         log("无数据")
     }
 }
+
+alert("联系管理员")
