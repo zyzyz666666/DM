@@ -1,6 +1,6 @@
 "ui";
 
-alert("最新版：v1.36 + v3");
+alert("最新版：v1.38 + v8");
 ui.layout(
     <frame>
         <vertical bg="#eef2fb">
